@@ -2,15 +2,15 @@
 
 This program allow you to have access to Heroes/Maps and player info easily.
 
-# Dependencies
+## Dependencies
 
 To make it works you need : 
 
-	python3
-	requests :  pip install requests
-	configparser : pip install configparser
+* python3
+	* requests
+	* configparser
 
-# Use
+## Use
 
 There is many ways to use it enter 
 

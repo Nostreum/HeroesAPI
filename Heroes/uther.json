@@ -1,0 +1,29 @@
+{
+	"Abilities":{
+		"Q":"Holy Light : Heal target ally for 380 Health. When used on a target other than Uther, also heal Uther for 190 Health.",
+		"Z":"Holy Radiance : Heal all allies in a line for 160 Health, dealing 160 damage to enemies.",
+		"E":"Hammer of Justice : Deal 114 damage and Stun the target for 0.75 seconds.",
+		"D":"Devotion : Heroes healed by Uther's Basic Abilities gain 25 amor for 2 seconds. This effect does not stack with itself. Upon dying, Uther becomes an Invulnerable spirit for up to 8 seconds. While in spirit form, uther can heal allies with Flash of Ligh."
+	},
+
+	"Heroic Abilities":{
+		"R1":"Divine Shield : Make an allied Hero Invulnerable and increase their Movement Speed by 20% for 3 seconds.",
+		"R2":"Divine Storm : Deal 187 damage and Stun nearby enemies for 1.75 seconds."
+	},
+
+	"Tier 1":[
+		{
+			"Name":"Silver Touch",
+			"Description":"Quest : Reduce damage from Heroic sources with devotion. \n\t\t\tReward : After reducing damage 40 times, Holy Light's Mana cost is reduced from 90 to 70. \n\t\t\tReward : After reducing damage 80 times, Holy Light's Mana cost is reduced to 50, and its range is increased by 50%"
+			
+		},
+		{
+			"Name":"Wave of Light",
+			"Description":"Quest : Damage or heal Heroes 60 times with Holy Radiance. \n\t\t\tReward: Increase the duration of Devotion by 1 second. \n\t\t\tPassive : Damaging or healing Heroes with Holy Radiance refunds 8 Mana and reduces its cooldown by 1 second."
+		},
+		{
+			"Name":"Hammer of the Lightbringer",
+			"Description":"Quest : Basic Attack enemies 75 times. \n\t\t\tReward : Basic Attacks reduce the cooldown of Hammer of Justice by 1.5 seconds. \n\t\t\tPassive : Basic Attacks restore 1.50% of Uther's maximum Mana"
+		}
+	]
+}

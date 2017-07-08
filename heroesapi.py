@@ -1,4 +1,5 @@
 import sys
+import os
 import requests
 import json 
 import configparser as ConfigParser
@@ -38,7 +39,8 @@ def loop():
 	print("-(1) Heroes list")
 	print("-(2) Map list")
 	print("-(3) Player info")
-	print("-(4) Exit")
+	print("-(4) Specific heroes info")
+	print("-(5) Exit")
 	inp = int(input("Choice : "))
 
 	if inp == 1:
@@ -48,6 +50,8 @@ def loop():
 	elif inp == 3:
 		player_info()
 	elif inp == 4:
+		specific_heroes_info()
+	elif inp == 5:
 		print("Thank's for using HeroesAPI. See you soon !")
 		exit()
 	else:
@@ -59,10 +63,76 @@ def heroes_list():
 	heroes_list = requests.get("https://api.hotslogs.com/Public/Data/Heroes")
 	data_heroes = json.loads(heroes_list.text)
 
-	for heroes in data_heroes:
-		print(heroes['PrimaryName'] + " is a " + heroes['Group'])
+	heroes_type = input("Which type (All, Assassin, Specialist, Support, Tank) : ")
+
+	if heroes_type == "All":
+		heroes_list_all(data_heroes)
+	elif heroes_type != "Assassin" and heroes_type != "Specialist" and heroes_type != "Support" and heroes_type != "Tank":
+		print("Type undefined, try again.")
+		exit()
+	else:
+		heroes_list_by_type(data_heroes, heroes_type)
 
 	loop()
+
+def specific_heroes_info():
+
+	heroes_name = input("Enter the hero name : ")
+	
+	if(os.path.exists("Heroes/"+heroes_name+".json")):
+		with open("Heroes/"+heroes_name+".json", "rb") as fin:
+			content = json.load(fin)
+	else:
+		print("File " + heroes_name + ".json not found.")
+
+	print("============================"+heroes_name.upper()+"============================")
+	print("Basic abilities : ")
+	print("\t"+content['Abilities']['Q'])
+	print("\t"+content['Abilities']['Z'])
+	print("\t"+content['Abilities']['E'])
+	print("\n")
+	print("Heroic Abilities : ")
+	print("\t"+content['Heroic Abilities']['R1'])
+	print("\t"+content['Heroic Abilities']['R2'])
+	print("\n")
+	print("Tier 1 : ")
+	for talent in content['Tier 1']:
+		print("\t"+talent['Name']+" : "+talent['Description'])
+
+def heroes_list_all(data_heroes):
+
+	print("-------------------------------")
+	for heroes in data_heroes:
+		name_length = len(heroes['PrimaryName'])
+		space = ""
+		for i in range(name_length, 16):
+			space += " "
+
+		group_length = len(heroes['Group'])
+		space2 = ""
+		for i in range(group_length, 10):
+			space2 += " "
+
+		print("|"+heroes['PrimaryName'] + space + " | " + heroes['Group'] + space2 + "|")
+	print("-------------------------------")
+
+def heroes_list_by_type(data_heroes, group_type):
+
+	print("-------------------------------")
+	for heroes in data_heroes:
+		if(heroes['Group'] == group_type):
+			name_length = len(heroes['PrimaryName'])
+			space = ""
+			for i in range(name_length, 16):
+				space += " "
+
+			group_length = len(heroes['Group'])
+			space2 = ""
+			for i in range(group_length, 10):
+				space2 += " "
+
+			print("|"+heroes['PrimaryName'] + space + " | " + heroes['Group'] + space2 + "|")
+	print("-------------------------------")
 
 def map_list():
 	
