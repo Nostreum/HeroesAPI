@@ -6,16 +6,38 @@ import configparser as ConfigParser
 
 def main():
 
-	print("================= HEROES OF THE STORM API v1.0 =================")
-	print("================================================================\n\n")
+	argc = len(sys.argv)
+	argv = sys.argv
 
-	if len(sys.argv) > 1:
-		if sys.argv[1] == "-info":
-			if len(sys.argv) > 2:
+	if argc > 1:
+		argv1 = argv[1]
+
+	if sys.platform == "linux2" or sys.platform == "darwin":
+		os.system('clear')
+	elif sys.platform == "win32":
+		os.system('cls')
+
+	print("================= HEROES OF THE STORM API v1.0 =================")
+	print("================================================================\n\n") 
+
+	if argc > 1:
+		if argv1 == "-info":
+			if argc > 2:
 				player_info(sys.argv[2])
 			else:
 				player_info(parse_config(), 0)
-		elif sys.argv[1] == "-help":
+		elif argv1 == "-hero":
+			if argc > 2:
+				specific_heroes_info(sys.argv[2])
+			else:
+				print("Bad arguments.")
+				help()
+		elif argv1 == "-map":
+			map_list()
+		elif argv1 == "-help":
+			help()
+		else:
+			print("Bad arguments.")
 			help()
 	else:
 		loop()
@@ -36,12 +58,12 @@ def parse_config():
 
 def loop():
 
-	print("-(1) Heroes list")
-	print("-(2) Map list")
-	print("-(3) Player info")
-	print("-(4) Specific heroes info")
-	print("-(5) Exit")
-	inp = int(input("Choice : "))
+	menu()
+	try:
+		inp = int(input("Choice : "))
+	except:
+		print("Please enter a valid number.")
+		menu()
 
 	if inp == 1:
 		heroes_list()
@@ -63,11 +85,11 @@ def heroes_list():
 	heroes_list = requests.get("https://api.hotslogs.com/Public/Data/Heroes")
 	data_heroes = json.loads(heroes_list.text)
 
-	heroes_type = input("Which type (All, Assassin, Specialist, Support, Tank) : ")
+	heroes_type = input("Which type (All, Assassin, Specialist, Support, Warrior) : ")
 
 	if heroes_type == "All":
 		heroes_list_all(data_heroes)
-	elif heroes_type != "Assassin" and heroes_type != "Specialist" and heroes_type != "Support" and heroes_type != "Tank":
+	elif heroes_type != "Assassin" and heroes_type != "Specialist" and heroes_type != "Support" and heroes_type != "Warrior":
 		print("Type undefined, try again.")
 		exit()
 	else:
@@ -75,9 +97,10 @@ def heroes_list():
 
 	loop()
 
-def specific_heroes_info():
+def specific_heroes_info(heroes_name="none"):
 
-	heroes_name = input("Enter the hero name : ")
+	if heroes_name == "none":
+		heroes_name = input("Enter the hero name : ")
 	
 	if(os.path.exists("Heroes/"+heroes_name+".json")):
 		with open("Heroes/"+heroes_name+".json", "rb") as fin:
@@ -86,17 +109,22 @@ def specific_heroes_info():
 		print("File " + heroes_name + ".json not found.")
 
 	print("============================"+heroes_name.upper()+"============================")
-	print("Basic abilities : ")
-	print("\t"+content['Abilities']['Q'])
-	print("\t"+content['Abilities']['Z'])
-	print("\t"+content['Abilities']['E'])
+	show_tier(content, "Basic Abilities")
+	show_tier(content, "Heroic Abilities")
+	show_tier(content, "Tier 1")
+	show_tier(content, "Tier 4")
+	show_tier(content, "Tier 7")
+	show_tier(content, "Tier 13")
+	show_tier(content, "Tier 16")
+	show_tier(content, "Tier 20")
+
+	loop()
+
+def show_tier(content, name):
+
 	print("\n")
-	print("Heroic Abilities : ")
-	print("\t"+content['Heroic Abilities']['R1'])
-	print("\t"+content['Heroic Abilities']['R2'])
-	print("\n")
-	print("Tier 1 : ")
-	for talent in content['Tier 1']:
+	print("["+name+"] : ")
+	for talent in content[name]:
 		print("\t"+talent['Name']+" : "+talent['Description'])
 
 def heroes_list_all(data_heroes):
@@ -164,14 +192,14 @@ def player_info(battletag="none", looping=1):
 
 	qm_rank = str(leaderboard[0]['LeagueRank'])
 	hl_rank = str(leaderboard[1]['LeagueRank'])
-	tl_rank = leaderboard[2]['LeagueRank']
+	tl_rank = str(leaderboard[2]['LeagueRank'])
 	ud_rank = str(leaderboard[3]['LeagueRank'])
 
-	tl_rank_s = convert_mmr_to_rank(tl_rank)
+	#tl_rank_s = convert_mmr_to_rank(tl_rank)
 
 	print("----------------- Player  info -----------------\n")
 	print("       | QuickMatch| HeroLeague| TeamLeague | Unranked|")
-	print("|RANK  | "+qm_rank+"      | "+hl_rank+"      | "+tl_rank_s+"| "+ud_rank+"    |")
+	print("|RANK  | "+qm_rank+"      | "+hl_rank+"      | "+tl_rank+"       | "+ud_rank+"    |")
 	print("|MMR   | "+qm_mmr+"      | "+hl_mmr+"      | "+tl_mmr+"       | "+ud_mmr+"    |\n")
 
 	if looping == 1:
@@ -179,6 +207,7 @@ def player_info(battletag="none", looping=1):
 	else:
 		exit()
 
+#TO DO
 def convert_mmr_to_rank(tl_rank):
 
 	if tl_rank < 200:
@@ -240,10 +269,28 @@ def convert_mmr_to_rank(tl_rank):
 
 def help():
 
-	print("<==== HELP ====>")
+	print("\n")
+	print("---------------------------")
+	print("           HELP            |")
+	print("---------------------------")
 	print("\t-info : <battletag>\tDirectly show player info")
+	print("\t-hero : <hero_name>\tDirectly show hero info")
+	print("\t-map  :            \tDirectly show all maps")
 	print("\t-help :            \tShow help")
 
 	exit()
+
+def menu():
+
+	print("\n")
+	print("---------------------------")
+	print("           MENU            |")
+	print("---------------------------")
+	print("-(1) Heroes list           |")
+	print("-(2) Map list              |")
+	print("-(3) Player info           |")
+	print("-(4) Specific heroes info  |")
+	print("-(5) Exit                  |")
+	print("---------------------------")
 
 main()

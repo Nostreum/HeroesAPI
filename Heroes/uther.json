@@ -1,15 +1,34 @@
 {
-	"Abilities":{
-		"Q":"Holy Light : Heal target ally for 380 Health. When used on a target other than Uther, also heal Uther for 190 Health.",
-		"Z":"Holy Radiance : Heal all allies in a line for 160 Health, dealing 160 damage to enemies.",
-		"E":"Hammer of Justice : Deal 114 damage and Stun the target for 0.75 seconds.",
-		"D":"Devotion : Heroes healed by Uther's Basic Abilities gain 25 amor for 2 seconds. This effect does not stack with itself. Upon dying, Uther becomes an Invulnerable spirit for up to 8 seconds. While in spirit form, uther can heal allies with Flash of Ligh."
-	},
+	"Name":"Uther",
+	"Basic Abilities":[
+		{
+			"Name":"Holy Light (Q)",
+			"Description":"Heal target ally for 380 Health. When used on a target other than Uther, also heal Uther for 190 Health."
+		},
+		{
+			"Name":"Holy Radiance (Z)",
+			"Description":"Heal all allies in a line for 160 Health, dealing 160 damage to enemies."
+		},
+		{
+			"Name":"Hammer of Justice (E)",
+			"Description":"Deal 114 damage and Stun the target for 0.75 seconds."
+		},
+		{
+			"Name":"Devotion (D)",
+			"Description":"HHeroes healed by Uther's Basic Abilities gain 25 amor for 2 seconds. This effect does not stack with itself. Upon dying, Uther becomes an Invulnerable spirit for up to 8 seconds. While in spirit form, uther can heal allies with Flash of Light."
+		}
+	],
 
-	"Heroic Abilities":{
-		"R1":"Divine Shield : Make an allied Hero Invulnerable and increase their Movement Speed by 20% for 3 seconds.",
-		"R2":"Divine Storm : Deal 187 damage and Stun nearby enemies for 1.75 seconds."
-	},
+	"Heroic Abilities":[
+		{
+			"Name":"Divine Shield (R1)",
+			"Description":"Make an allied Hero Invulnerable and increase their Movement Speed by 20% for 3 seconds."
+		},
+		{
+			"Name":"Divine Storm (R2)",
+			"Description":"Deal 187 damage and Stun nearby enemies for 1.75 seconds."
+		}
+	],
 
 	"Tier 1":[
 		{
@@ -24,6 +43,85 @@
 		{
 			"Name":"Hammer of the Lightbringer",
 			"Description":"Quest : Basic Attack enemies 75 times. \n\t\t\tReward : Basic Attacks reduce the cooldown of Hammer of Justice by 1.5 seconds. \n\t\t\tPassive : Basic Attacks restore 1.50% of Uther's maximum Mana"
+		}
+	],
+
+	"Tier 4":[
+		{
+			"Name":"Holy Shock",
+			"Description":"Holy Light can be used on an enemy to do 50% of its healing amount as damage. When used this way, Uther receives its self-healing benefits, its cooldown is reduced by 6 seconds, and it refunds 45 Mana"
+		},
+		{
+			"Name":"Pursuit of Justice",
+			"Description":"Hammer of Justice increases Uther's Movement Speed by 25% for 3 seconds"
+		},
+		{
+			"Name":"Holy Fire",
+			"Description":"Deal 16(+4% per level) damage per second to nearby enemies. Basic Attacks against enemy Heroes this damage by 20% for 3 seconds. This can stack up to 3 times."
+		}
+	],
+
+	"Tier 7":[
+		{
+			"Name":"Armor of Faith",
+			"Description":"Being Stunned, Rooted, or Silenced causes Holy Light's cooldown to recharge 200% faster for 6 seconds."
+		},
+		{
+			"Name":"Guardian of Ancient Kings",
+			"Description":"Healing a Hero that is Stunned, Rooted, or Silenced increases the Amor bonus they receive from Devotion from 25 to 50."
+		},
+		{
+			"Name":"Hand of Protection",
+			"Description":"Activate to make target ally Unstoppable for 1 second. Cannot be cast on Uther. Basic Attacks reduce Hand of Protection's cooldown by 5 seconds."
+		}
+	],
+
+	"Tier 13":[
+		{
+			"Name":"Blessed Champion",
+			"Description":"For the next 5 seconds after using Holy Light, Uther's Basic Attacks heal him and nearby allies for 15% of the total amount healed by Holy Light."
+		},
+		{
+			"Name":"Well Met",
+			"Description":"When used against Heroes, Hammer of Justice reuces the target's Movement Speed and damage dealt by 25% for 3 seconds."
+		},
+		{
+			"Name":"Spell Shield",
+			"Description":"Every 30 seconds, gain 50 Spell Amor against the next enemy Ability and subsequent Abilities for 3 seconds, reducing the damage taken by 50%. Can be toggled to allow or prevent this talent from triggering automatically."
+		}	
+	],
+
+	"Tier 16":[
+		{
+			"Name":"Beacon of Light",
+			"Description":"While below 50% Health, Uther received 200% more self-healing when healing others with Holy Light."
+		},
+		{
+			"Name":"Tyr's Deliverance",
+			"Description":"Allies healed by Holy Radiance receive 40% increased healing from all sources for 6 seconds."
+		},
+		{
+			"Name":"Benediction",
+			"Description":"Activate to reduce the Mana cost of Uther's next Basic Ability and its cooldown by 10 seconds."
+		}
+	],
+
+	"Tier 20":[
+		{
+			"Name":"Bulwark of Light",
+			"Description":"Divine Shield lasts 2 seconds longer and its cooldown is reduced by 20 seconds."
+		},
+		{
+			"Name":"Divine Hurricane",
+			"Description":"Divine Storm's radius is increased by 50% and its cooldown is reduced by 20 seconds."
+		},
+		{
+			"Name":"Redemption",
+			"Description":"After Eternal Vanguard ends, Uthers revives at the spirit's location with 50% of his maximum Health. This effect has a 180 second cooldown."
+		},
+		{
+			"Name":"Divine Protection",
+			"Description":"Devotion now stacks twice, and its duration is refreshed when applied."
 		}
 	]
 }
